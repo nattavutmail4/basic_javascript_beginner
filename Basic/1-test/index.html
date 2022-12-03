@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="title"></title>
+    <style>
+        button{
+            padding: 4px;
+            margin: 2px;
+            background-color: blue;
+            color: wheat;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover{
+            background-color: palevioletred;
+            color:white;
+        }
+        input{
+            padding: 4px;
+        }
+        #customers {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 50%;
+        }
+
+        #customers td, #customers th {
+        border: 1px solid #ddd;
+        padding: 8px;
+        }
+
+        #customers tr:nth-child(even){background-color: #f2f2f2;}
+
+        #customers tr:hover {background-color: #ddd;}
+
+        #customers th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #04AA6D;
+        color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="message"></h1>
+    <form onsubmit="Update()">
+        <input type="text" placeholder="ค้นหาชื่อหนังสือ" id="search"> 
+        <button type="submit">ค้นหา</button>
+        <hr>
+        <h2 id="detail"></h2>
+        <h3>รายการหนังสือ</h3>
+        <ul id="list"></ul>
+    </form>
+    <script>
+        let title = document.getElementById('title').innerHTML='พื้นฐาน Javascript'
+        let message = document.getElementById('message').innerHTML='ระบบค้นหาหนังสือ'
+
+        let id =1;
+        const book = [
+            {id:id++,name:"php",price:20000},
+            {id:id++,name:"html",price:10000},
+            {id:id++,name:"sql",price:10000},
+            {id:id++,name:"javascript",price:10000},
+            {id:id++,name:"vuejs",price:10000},
+            {id:id++,name:"Kamen Ride",price:10000},
+        ]
+        async function Update(){
+           event.preventDefault()
+           let name = document.getElementById('search').value
+           try {
+            let s = book.find((el)=>{ return(el.name === name )})
+            if(s != undefined){
+                let  cr = '';
+                cr += '<table id="customers">',
+                cr += `   <tr>
+                            <th>id</th>
+                            <th>name</th>
+                            <th>price</th>
+                    </tr>`,
+                cr += '<tbody><tr>',
+                cr += '<td>' + s.id +'</td>',
+                cr += '<td>' + s.name +'</td>',
+                cr += '<td>' + s.price +'</td></tr>',
+                cr += "</table>"
+                document.getElementById('detail').innerHTML= cr
+            }else{
+                document.getElementById('detail').innerHTML='ไม่พบข้อมูลสินค้า'
+            }
+            // 
+           } catch (error) {
+              console.error(error.message)
+           }
+        }
+
+        async function list() {
+            let cr = '';
+            for(let i=0; i <=book.length;i++){
+                if(book[i]!=undefined){
+                    cr +=`<li>${book[i].id} ${book[i].name} ${book[i].price} </li>`
+                }
+            }
+            document.getElementById('list').innerHTML=cr
+        }
+        list()
+    </script>
+</body>
+</html>
