@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Workshop Javascript เปิด ปิดไฟ</h1>
+    <button onclick="document.getElementById('myImage').src='https://www.w3schools.com/js/pic_bulbon.gif'">Turn on the light</button>
+    <img src="https://www.w3schools.com/js/pic_bulboff.gif" alt="bulboof" style="width:100px" id="myImage">
+    <button onclick="document.getElementById('myImage').src='https://www.w3schools.com/js/pic_bulboff.gif'">Turn off the light</button>
+    <br><hr><br>
+    <h2>Workshop Javascript การใช้ .inner html</h2>
+    <button onclick="text()">ทักทาย</button>
+    <h2 id="text">ข้อความ</h2>
+    <button onclick="document.getElementById('text').innerHTML='ข้อความ'">แบบเดิม</button>
+    <br><hr>
+    <h2>My First Web Page</h2>
+    <p id="pr_num"></p>
+    <button onclick="window.print()">Print this page</button>
+    <hr>
+    <div onmouseover="this.style.backgroundColor='red'">MyDiv</div>
+    <form onsubmit="submitRegister()">
+      <label for="">ชื่อ</label>
+      <input type="text"  id="name" placeholder="name" required>
+      <br>
+      <label for="">นามสกุล</label>
+      <input type="text"  id="lastname" placeholder="lastname" required><br>
+      <button type="submit">ลงทะเบียน</button>
+    </form>
+    <script>
+        function text (){
+            let text = document.getElementById('text')
+            text.style.fontSize='35px'
+            text.style.color='red'
+            text.innerHTML='ทักทายจ้า'
+        }
+        
+
+        function submitRegister (){
+            event.preventDefault()
+            let name = document.getElementById('name').value
+            let last = document.getElementById('lastname').value
+            
+            alert(name + last);
+        }
+        function text_pr(){
+            let name = document.getElementById('name').value
+            let last = document.getElementById('lastname').value
+            document.getElementById('pr_num').innerHTML = name + ' ' +last
+        }
+        text_pr()
+    </script>
+</body>
+</html>
